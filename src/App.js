@@ -1,24 +1,141 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
+
+//css
+import "./App.css";
+
+// React router dom
+import { Route, Routes, Navigate, useLocation } from "react-router-dom";
+
+//Framer motion
+import { AnimatePresence, motion } from "framer-motion";
+
+//Components
+import Home from "./Components/Views/Home/Home";
+import Article from "./Components/Views/Article/Article";
+import EditArticle from "./Components/Views/EditArticle/EditArticle";
+import CreateArticle from "./Components/Views/CreateArticle/CreateArticle";
+import Explore from "./Components/Views/Explore/Explore";
+import Historial from "./Components/Views/Historial/Historial";
+import Error404 from "./Components/Views/Error404/Error404";
+
+const pageTransition = {
+  in: {
+    opacity: 1,
+  },
+
+  out: {
+    opacity: 0,
+  },
+};
 
 function App() {
+  const location = useLocation();
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <AnimatePresence>
+        <Routes location={location} key={location.pathname}>
+          <Route
+            path="/"
+            element={
+              <motion.div
+                className="page"
+                initial="out"
+                animate="in"
+                exit="out"
+                variants={pageTransition}
+              >
+                <Home />
+              </motion.div>
+            }
+          ></Route>
+          <Route
+            path="/explore"
+            element={
+              <motion.div
+                className="page"
+                initial="out"
+                animate="in"
+                exit="out"
+                variants={pageTransition}
+              >
+                <Explore />
+              </motion.div>
+            }
+          ></Route>
+          <Route
+            path="/Article"
+            element={
+              <motion.div
+                className="page"
+                initial="out"
+                animate="in"
+                exit="out"
+                variants={pageTransition}
+              >
+                <Article />
+              </motion.div>
+            }
+          ></Route>
+          <Route
+            path="/createarticle"
+            element={
+              <motion.div
+                className="page"
+                initial="out"
+                animate="in"
+                exit="out"
+                variants={pageTransition}
+              >
+                <CreateArticle />
+              </motion.div>
+            }
+          ></Route>
+          <Route
+            path="/editarticle"
+            element={
+              <motion.div
+                className="page"
+                initial="out"
+                animate="in"
+                exit="out"
+                variants={pageTransition}
+              >
+                <EditArticle />
+              </motion.div>
+            }
+          ></Route>
+          <Route
+            path="/historial"
+            element={
+              <motion.div
+                className="page"
+                initial="out"
+                animate="in"
+                exit="out"
+                variants={pageTransition}
+              >
+                <Historial />
+              </motion.div>
+            }
+          ></Route>
+
+          <Route
+            path="*"
+            element={
+              <motion.div
+                className="page"
+                initial="out"
+                animate="in"
+                exit="out"
+                variants={pageTransition}
+              >
+                <Error404 />
+              </motion.div>
+            }
+          ></Route>
+        </Routes>
+      </AnimatePresence>
+    </>
   );
 }
 
