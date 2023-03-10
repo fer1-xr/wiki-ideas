@@ -17,6 +17,7 @@ import CreateArticle from "./Components/Views/CreateArticle/CreateArticle";
 import Explore from "./Components/Views/Explore/Explore";
 import Historial from "./Components/Views/Historial/Historial";
 import Error404 from "./Components/Views/Error404/Error404";
+import DrawerAppBar from "./Components/Header/DrawerAppBar";
 
 const pageTransition = {
   in: {
@@ -32,6 +33,7 @@ function App() {
   const location = useLocation();
   return (
     <>
+      <DrawerAppBar />
       <AnimatePresence>
         <Routes location={location} key={location.pathname}>
           <Route
