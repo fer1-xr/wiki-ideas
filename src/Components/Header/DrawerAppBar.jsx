@@ -16,11 +16,19 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
+import InputBase from "@mui/material/InputBase";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { styled, alpha } from "@mui/material/styles";
 import { purple } from "@mui/material/colors";
+import SearchIcon from "@mui/icons-material/Search";
+import AddIcon from "@mui/icons-material/Add";
+
+//Components
+import BasicMenu from "./BasicMenu";
+import AddBasicMenu from "./AddBasicMenu";
 
 const drawerWidth = 240;
-const navItems = ["Home", "About", "Contact"];
+const navItems = ["Explore", "About", "Contact"];
 
 const theme = createTheme({
   palette: {
@@ -30,7 +38,7 @@ const theme = createTheme({
     },
     secondary: {
       // This is green.A700 as hex.
-      main: "#2F2F2F",
+      main: "#F5F5F5",
     },
   },
 });
@@ -43,11 +51,60 @@ function DrawerAppBar(props) {
     setMobileOpen((prevState) => !prevState);
   };
 
+  const Search = styled("div")(({ theme }) => ({
+    position: "relative",
+    borderRadius: theme.shape.borderRadius,
+    border: "0.5px solid #767778c1",
+    backgroundColor: alpha(theme.palette.common.white, 0.15),
+    "&:hover": {
+      backgroundColor: alpha(theme.palette.common.white, 0.25),
+    },
+    marginLeft: 0,
+    width: "100%",
+    [theme.breakpoints.up("sm")]: {
+      marginLeft: theme.spacing(1),
+      width: "auto",
+    },
+  }));
+
+  const SearchIconWrapper = styled("div")(({ theme }) => ({
+    padding: theme.spacing(0, 2),
+    height: "100%",
+    position: "absolute",
+    pointerEvents: "none",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  }));
+
+  const StyledInputBase = styled(InputBase)(({ theme }) => ({
+    color: "inherit",
+    "& .MuiInputBase-input": {
+      padding: theme.spacing(1, 1, 1, 0),
+      // vertical padding + font size from searchIcon
+      paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+      transition: theme.transitions.create("width"),
+      width: "100%",
+      [theme.breakpoints.up("sm")]: {
+        width: "12ch",
+        "&:focus": {
+          width: "20ch",
+        },
+      },
+    },
+  }));
+
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
       <Typography variant="h6" sx={{ my: 2 }}>
-        MUI
+        WikiIdeas
       </Typography>
+      <Divider />
+
+      <List>
+        <ListItem disablePadding></ListItem>
+      </List>
+
       <Divider />
       <List>
         {navItems.map((item) => (
@@ -75,7 +132,7 @@ function DrawerAppBar(props) {
               aria-label="open drawer"
               edge="start"
               onClick={handleDrawerToggle}
-              sx={{ mr: 2, display: { sm: "none" } }}
+              sx={{ mr: 2, display: { sm: "visible" } }}
             >
               <MenuIcon />
             </IconButton>
@@ -84,14 +141,23 @@ function DrawerAppBar(props) {
               component="div"
               sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
             >
-              MUI
+              WikiIdeas
             </Typography>
-            <Box sx={{ display: { xs: "none", sm: "block" } }}>
-              {navItems.map((item) => (
-                <Button key={item} sx={{ color: "#fff" }}>
-                  {item}
-                </Button>
-              ))}
+
+            <Search>
+              <SearchIconWrapper>
+                <SearchIcon />
+              </SearchIconWrapper>
+              <StyledInputBase
+                placeholder="Search…"
+                inputProps={{ "aria-label": "search" }}
+              />
+            </Search>
+            <Box sx={{ display: { xs: "none", sm: "block" }, ml: 3 }}>
+              <AddBasicMenu />
+            </Box>
+            <Box sx={{ display: { xs: "none", sm: "block" }, ml: 3 }}>
+              <BasicMenu />
             </Box>
           </Toolbar>
         </AppBar>
@@ -105,7 +171,7 @@ function DrawerAppBar(props) {
               keepMounted: true, // Better open performance on mobile.
             }}
             sx={{
-              display: { xs: "block", sm: "none" },
+              display: { xs: "visible", sm: "visible" },
               "& .MuiDrawer-paper": {
                 boxSizing: "border-box",
                 width: drawerWidth,
