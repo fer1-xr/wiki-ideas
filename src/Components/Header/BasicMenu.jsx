@@ -7,6 +7,7 @@ import MenuItem from "@mui/material/MenuItem";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 
 export default function BasicMenu() {
+  const menuItems = ["Main page", "Explore", "About", "Contact"];
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -38,9 +39,13 @@ export default function BasicMenu() {
           "aria-labelledby": "basic-button",
         }}
       >
-        <MenuItem onClick={handleClose}>Explore</MenuItem>
-        <MenuItem onClick={handleClose}>About</MenuItem>
-        <MenuItem onClick={handleClose}>Contact</MenuItem>
+        {menuItems.map((item, index) => {
+          return (
+            <MenuItem key={index} onClick={handleClose}>
+              {item}
+            </MenuItem>
+          );
+        })}
       </Menu>
     </div>
   );

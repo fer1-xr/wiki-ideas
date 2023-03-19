@@ -26,9 +26,14 @@ import AddIcon from "@mui/icons-material/Add";
 //Components
 import BasicMenu from "./BasicMenu";
 import AddBasicMenu from "./AddBasicMenu";
+import Asynchronous from "./Asynchronous";
+import SearchBar from "./SearchBar";
+
+//Hooks
+import useMobile from "./../../Hooks/useMobile";
 
 const drawerWidth = 240;
-const navItems = ["Explore", "About", "Contact"];
+const navItems = ["Main page", "Explore", "About", "Contact"];
 
 const theme = createTheme({
   palette: {
@@ -44,8 +49,15 @@ const theme = createTheme({
 });
 
 function DrawerAppBar(props) {
+  const isMobile = useMobile();
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const logoUrl = "https://i.ibb.co/WfM2Rf0/favicon-32x32.png";
+
+  const hola = (e) => {
+    e.preventDefault();
+    console.log("Test");
+  };
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
@@ -97,15 +109,37 @@ function DrawerAppBar(props) {
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
       <Typography variant="h6" sx={{ my: 2 }}>
-        WikiIdeas
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            flexDirection: "row",
+            fontWeight: "bold",
+          }}
+        >
+          Wiki<span style={{ color: "#a1cdf1" }}>Ideas</span>
+          <img style={{ marginLeft: "10px" }} src={logoUrl} alt="32x32"></img>
+        </div>
       </Typography>
-      <Divider />
 
-      <List>
-        <ListItem disablePadding></ListItem>
-      </List>
+      {isMobile ? (
+        <>
+          <Divider />
+          <List sx={{ textAlign: "center" }}>
+            <ListItem disablePadding>
+              <ListItemButton sx={{ textAlign: "center" }}>
+                <ListItemText>New Article</ListItemText>
+              </ListItemButton>
+            </ListItem>
+          </List>
+        </>
+      ) : (
+        <></>
+      )}
 
       <Divider />
+      {/*Aquí va la lista de categorias */}
       <List>
         {navItems.map((item) => (
           <ListItem key={item} disablePadding>
@@ -139,20 +173,17 @@ function DrawerAppBar(props) {
             <Typography
               variant="h6"
               component="div"
-              sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
+              sx={{
+                flexGrow: 1,
+                display: { xs: "none", sm: "block" },
+                mt: 1,
+                mr: 1,
+              }}
             >
-              WikiIdeas
+              <img src={logoUrl} alt="logo32x32"></img>
             </Typography>
 
-            <Search>
-              <SearchIconWrapper>
-                <SearchIcon />
-              </SearchIconWrapper>
-              <StyledInputBase
-                placeholder="Search…"
-                inputProps={{ "aria-label": "search" }}
-              />
-            </Search>
+            <SearchBar sx={{ flexgrow: 1 }} />
             <Box sx={{ display: { xs: "none", sm: "block" }, ml: 3 }}>
               <AddBasicMenu />
             </Box>

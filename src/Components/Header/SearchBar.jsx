@@ -15,6 +15,9 @@ import { Formik, Field, ErrorMessage, Form } from "formik";
 //Yup
 import * as Yup from "yup";
 
+//Material UI
+import SearchIcon from "@mui/icons-material/Search";
+
 //Validation Schema
 
 const validationSchema = Yup.object().shape({
@@ -53,16 +56,10 @@ const SearchBar = () => {
         >
           {({ errors }) => (
             <Form>
-              <Field type="text" name="searchWord" placeholder="Médicos..." />
               <button className="search-button" type="submit">
-                <HiSearch />
+                <SearchIcon />
               </button>
-              <ErrorMessage
-                name="searchWord"
-                component={() => {
-                  return <div className="error">{errors.searchWord}</div>;
-                }}
-              />
+              <Field type="text" name="searchWord" placeholder="Search" />
             </Form>
           )}
         </Formik>
