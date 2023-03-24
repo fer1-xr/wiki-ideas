@@ -1,4 +1,11 @@
-import * as React from "react";
+import React, {useLayoutEffect, useState} from 'react'
+
+
+//react router dom
+import {Link} from "react-router-dom"
+
+//React router
+import { useLocation } from 'react-router';
 
 //MUI MATERIAL
 import PropTypes from "prop-types";
@@ -50,61 +57,28 @@ const theme = createTheme({
 
 function DrawerAppBar(props) {
   const isMobile = useMobile();
+  const [isInHome, setisInHome] = useState(false);
   const { window } = props;
+  const location = useLocation()
+  const {pathname}= location;
+
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const logoUrl = "https://i.ibb.co/WfM2Rf0/favicon-32x32.png";
 
-  const hola = (e) => {
-    e.preventDefault();
-    console.log("Test");
-  };
+useLayoutEffect(() => {
+ if(pathname=="/mainpage"){
+  setisInHome(true)
+ }else{
+  setisInHome(false)
+ }
+
+ return ()=>{}
+},[pathname])
+
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
   };
-
-  const Search = styled("div")(({ theme }) => ({
-    position: "relative",
-    borderRadius: theme.shape.borderRadius,
-    border: "0.5px solid #767778c1",
-    backgroundColor: alpha(theme.palette.common.white, 0.15),
-    "&:hover": {
-      backgroundColor: alpha(theme.palette.common.white, 0.25),
-    },
-    marginLeft: 0,
-    width: "100%",
-    [theme.breakpoints.up("sm")]: {
-      marginLeft: theme.spacing(1),
-      width: "auto",
-    },
-  }));
-
-  const SearchIconWrapper = styled("div")(({ theme }) => ({
-    padding: theme.spacing(0, 2),
-    height: "100%",
-    position: "absolute",
-    pointerEvents: "none",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  }));
-
-  const StyledInputBase = styled(InputBase)(({ theme }) => ({
-    color: "inherit",
-    "& .MuiInputBase-input": {
-      padding: theme.spacing(1, 1, 1, 0),
-      // vertical padding + font size from searchIcon
-      paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-      transition: theme.transitions.create("width"),
-      width: "100%",
-      [theme.breakpoints.up("sm")]: {
-        width: "12ch",
-        "&:focus": {
-          width: "20ch",
-        },
-      },
-    },
-  }));
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
@@ -129,7 +103,9 @@ function DrawerAppBar(props) {
           <List sx={{ textAlign: "center" }}>
             <ListItem disablePadding>
               <ListItemButton sx={{ textAlign: "center" }}>
-                <ListItemText>New Article</ListItemText>
+              <Link style={{textDecoration:"none", color:"black"}} to={`/createarticle`}>
+                <ListItemText sx={{ textAlign:"center", ml:8.5}} >New Article</ListItemText>
+              </Link>
               </ListItemButton>
             </ListItem>
           </List>
@@ -139,7 +115,22 @@ function DrawerAppBar(props) {
       )}
 
       <Divider />
-      {/*Aquí va la lista de categorias */}
+      {isMobile?(<>   
+      <List>
+        {navItems.map((item) => (
+          <ListItem key={item} disablePadding>
+            <ListItemButton sx={{ textAlign: "center" }}>
+              <Link style={{textDecoration:"none", color:"black"}} to={`/${item.replace(/\s/g, "").toLowerCase()}`}>
+              <ListItemText primary={item} sx={{ textAlign:"center", ml:2}} />
+              </Link>
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
+      </>):(<></>)}
+      <Divider/>
+  {/*Aquí va la lista de categorias */}
+
       <List>
         {navItems.map((item) => (
           <ListItem key={item} disablePadding>
@@ -149,6 +140,7 @@ function DrawerAppBar(props) {
           </ListItem>
         ))}
       </List>
+      
     </Box>
   );
 
@@ -182,8 +174,11 @@ function DrawerAppBar(props) {
             >
               <img src={logoUrl} alt="logo32x32"></img>
             </Typography>
-
-            <SearchBar sx={{ flexgrow: 1 }} />
+              {isInHome?(
+              <></>
+                ):(
+              <SearchBar sx={{ flexgrow: 1 }} />      
+              )}
             <Box sx={{ display: { xs: "none", sm: "block" }, ml: 3 }}>
               <AddBasicMenu />
             </Box>

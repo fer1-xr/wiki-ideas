@@ -16,6 +16,8 @@ import EditArticle from "./Components/Views/EditArticle/EditArticle";
 import CreateArticle from "./Components/Views/CreateArticle/CreateArticle";
 import Explore from "./Components/Views/Explore/Explore";
 import Historial from "./Components/Views/Historial/Historial";
+import Contact from "./Components/Views/Contact/Contact";
+import About from "./Components/Views/About/About"
 import Error404 from "./Components/Views/Error404/Error404";
 import DrawerAppBar from "./Components/Header/DrawerAppBar";
 
@@ -37,7 +39,7 @@ function App() {
       <AnimatePresence>
         <Routes location={location} key={location.pathname}>
           <Route
-            path="/"
+            path="/mainpage"
             element={
               <motion.div
                 className="page"
@@ -120,7 +122,34 @@ function App() {
               </motion.div>
             }
           ></Route>
-
+            <Route
+            path="/about"
+            element={
+              <motion.div
+                className="page"
+                initial="out"
+                animate="in"
+                exit="out"
+                variants={pageTransition}
+              >
+                <About/>
+              </motion.div>
+            }
+          ></Route>
+          <Route
+            path="/contact"
+            element={
+              <motion.div
+                className="page"
+                initial="out"
+                animate="in"
+                exit="out"
+                variants={pageTransition}
+              >
+                <Contact/>
+              </motion.div>
+            }
+          ></Route>
           <Route
             path="*"
             element={

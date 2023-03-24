@@ -7,6 +7,9 @@ import MenuItem from "@mui/material/MenuItem";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import AddIcon from "@mui/icons-material/Add";
 
+// React router dom
+import { Link } from "react-router-dom";
+
 export default function BasicMenu() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -39,7 +42,9 @@ export default function BasicMenu() {
           "aria-labelledby": "basic-button",
         }}
       >
-        <MenuItem onClick={handleClose}>New Article</MenuItem>
+        <MenuItem onClick={handleClose}>   <Link style={{textDecoration:"none", color:"black"}} to={`/createarticle`} > 
+              New Article
+              </Link></MenuItem>
       </Menu>
     </div>
   );

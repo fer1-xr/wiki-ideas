@@ -6,6 +6,9 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 
+// React Router Dom
+import { Link } from "react-router-dom";
+
 export default function BasicMenu() {
   const menuItems = ["Main page", "Explore", "About", "Contact"];
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -42,7 +45,9 @@ export default function BasicMenu() {
         {menuItems.map((item, index) => {
           return (
             <MenuItem key={index} onClick={handleClose}>
+              <Link style={{textDecoration:"none", color:"black"}} to={`/${item.replace(/\s/g, "").toLowerCase()}`} > 
               {item}
+              </Link>
             </MenuItem>
           );
         })}
