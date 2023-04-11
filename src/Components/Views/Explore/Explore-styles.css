@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&family=Readex+Pro:wght@500&display=swap');
+
+body{
+    font-family: 'Readex Pro', sans-serif;
+}
+
+h1{
+    font-family: 'Readex Pro', sans-serif;
+    font-size: 36px;
+    margin-top: 50px  ;
+margin-bottom: 5px;
+}
+h3{
+    color: #A1CDF1;
+    font-family: 'Readex Pro', sans-serif;
+    font-size: 20px;
+    margin-top: 5px;
+}
+.btn1{
+    background-color: #A1CDF1;
+    padding: 10px;
+    border-radius:50px;
+    border: none;
+    font-weight: 700;
+    margin-bottom: 55px;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}

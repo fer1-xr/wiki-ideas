@@ -1,12 +1,21 @@
 import React from "react";
 
+import SearchBar from "../../Header/SearchBar";
+
 //CSS
 import "./Explore-styles.css";
 
 const Explore = () => {
   return (
     <>
-      <h1>Explore</h1>
+     <div className="container">
+     <h1>Wiki Ideas</h1>
+      <h3>Open free enciclopedia</h3> 
+      
+      <button className="btn1  ">Create an Articles</button>
+     
+  <SearchBar/>
+     </div>
     </>
   );
 };

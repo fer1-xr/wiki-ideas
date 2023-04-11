@@ -65,15 +65,19 @@ function DrawerAppBar(props) {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const logoUrl = "https://i.ibb.co/WfM2Rf0/favicon-32x32.png";
 
-useLayoutEffect(() => {
- if(pathname=="/mainpage"){
-  setisInHome(true)
- }else{
-  setisInHome(false)
- }
-
- return ()=>{}
-},[pathname])
+  useLayoutEffect(() => {
+    if(pathname=="/mainpage"){
+     setisInHome(true)
+    }else{
+     setisInHome(false)
+    }
+    if(pathname=="/explore"){
+     setisInHome(true)
+    }else{
+     setisInHome(false)
+    }
+    return ()=>{}
+   },[pathname])
 
 
   const handleDrawerToggle = () => {
