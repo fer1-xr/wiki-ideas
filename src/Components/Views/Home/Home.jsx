@@ -55,7 +55,7 @@ const Home = () => {
   return (
     <>
      <div className="home-container">
-      <img src="https://i.ibb.co/bHqm1F3/Wikiideas-Home.jpg" alt="wikiideaslogo_img" ></img>
+      <img className="main-img" src="https://i.ibb.co/bHqm1F3/Wikiideas-Home.jpg" alt="wikiideaslogo_img" ></img>
       <h3>Search about any topic and explore the articles.</h3>
       <SearchBar/>
 

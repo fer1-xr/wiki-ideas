@@ -66,12 +66,7 @@ function DrawerAppBar(props) {
   const logoUrl = "https://i.ibb.co/WfM2Rf0/favicon-32x32.png";
 
   useLayoutEffect(() => {
-    if(pathname=="/mainpage"){
-     setisInHome(true)
-    }else{
-     setisInHome(false)
-    }
-    if(pathname=="/explore"){
+    if(pathname=="/mainpage" || pathname=="/explore"){
      setisInHome(true)
     }else{
      setisInHome(false)
